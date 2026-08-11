@@ -16,9 +16,15 @@ clean-targets:
 
 models:
   swedbank_demo:
-    staging:
+    01_source_systems:
+      +schema: source_systems
+      +materialized: view
+    02_transformation_layer:
       +schema: transformation_layer
       +materialized: view
-    marts:
+    03_kri_report_layer:
       +schema: kri_report_layer
       +materialized: table
+    04_governance_metadata:
+      +schema: governance_metadata
+      +materialized: view

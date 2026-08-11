@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: raw_source_systems
+    schema: RAW_SOURCE_SYSTEMS
+    description: "Raw landing zone: extracts as if pulled from core banking, the IRB rating engine, Treasury's FX feed, and collateral management."
+    tables:
+      - name: src_customers
+        columns:
+          - name: customer_id
+            tests: [unique, not_null]
+      - name: src_loans
+        columns:
+          - name: loan_id
+            tests: [unique, not_null]
+      - name: src_collateral
+      - name: src_credit_ratings
+      - name: src_fx_rates
+      - name: src_npl_status

@@ -1,0 +1,1 @@
+select * from {{ source('raw_source_systems', 'src_credit_ratings') }}

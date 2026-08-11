@@ -1,10 +1,10 @@
 with loans as (
-    select * from {{ source('source_systems', 'src_loans') }}
+    select * from {{ ref('src_loans') }}
 ),
 
 date_spine as (
     select distinct as_of_date::date as as_of_date
-    from {{ source('source_systems', 'src_credit_ratings') }}
+    from {{ ref('src_credit_ratings') }}
 ),
 
 loan_months as (
@@ -15,23 +15,23 @@ loan_months as (
 
 ratings as (
     select *, as_of_date::date as rating_date
-    from {{ source('source_systems', 'src_credit_ratings') }}
+    from {{ ref('src_credit_ratings') }}
 ),
 
 npl as (
     select *, as_of_date::date as npl_date
-    from {{ source('source_systems', 'src_npl_status') }}
+    from {{ ref('src_npl_status') }}
 ),
 
 fx as (
     select *, rate_date::date as fx_date
-    from {{ source('source_systems', 'src_fx_rates') }}
+    from {{ ref('src_fx_rates') }}
     where currency_pair = 'EUR/SEK'
 ),
 
 collateral_by_loan as (
     select loan_id, sum(appraised_value) as collateral_value_local
-    from {{ source('source_systems', 'src_collateral') }}
+    from {{ ref('src_collateral') }}
     group by loan_id
 )
 
