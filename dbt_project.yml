@@ -1,0 +1,24 @@
+name: 'swedbank_demo'
+version: '1.0.0'
+config-version: 2
+
+profile: 'swedbank_demo'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  swedbank_demo:
+    staging:
+      +schema: transformation_layer
+      +materialized: view
+    marts:
+      +schema: kri_report_layer
+      +materialized: table

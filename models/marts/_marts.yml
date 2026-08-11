@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: kri_npl_ratio_by_segment
+    description: "NPL ratio KRI by country/segment/month, computed from stg_loan_risk_exposure."
+    columns:
+      - name: as_of_date
+        tests: [not_null]
+      - name: npl_ratio_pct
+        tests: [not_null]
+
+  - name: kri_credit_risk_report
+    description: "Exposure-weighted average PD and expected loss by country/segment/month."
+    columns:
+      - name: as_of_date
+        tests: [not_null]
+      - name: pd_coverage_pct
+        description: "% of exposure with a populated PD that month. Drops for Estonia at the last month-end (Incident B)."
